@@ -14,6 +14,9 @@ interface ComicDAO {
     @Query("SELECT * FROM Comic WHERE num like :comicId")
     fun getComicById(comicId: Int): Comic?
 
+    @Query("SELECT isFavorite FROM Comic WHERE num like :comicId")
+    fun checkComicFromFavorite(comicId: Int): Boolean?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertComic(comic: Comic)
 

@@ -22,7 +22,16 @@ class ComicsDataSourceImpl @Inject constructor(
                     response: Response<Comic?>
                 ) {
                     if (response.isSuccessful && response.code() == 200) {
-                        callback.onComicLoaded(response.body()!!)
+                        mUseCaseScheduler.execute {
+                            val isFavorite =
+                                mComicDAO.checkComicFromFavorite(response.body()?.num!!)
+                            if (isFavorite != null) {
+                                val res = response.body()
+                                res?.isFavorite = isFavorite
+                                callback.onComicLoaded(res!!)
+                            } else
+                                callback.onComicLoaded(response.body()!!)
+                        }
                     } else {
                         callback.onError(Throwable(response.errorBody().toString()))
                     }

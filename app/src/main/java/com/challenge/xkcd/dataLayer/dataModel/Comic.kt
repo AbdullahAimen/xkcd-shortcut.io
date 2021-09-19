@@ -17,7 +17,7 @@ class Comic(
     val img: String?,
     val title: String?,
     val day: String?,
-    val isFavorite: Boolean = false,
+    var isFavorite: Boolean = false,
 
     ) {
     fun getTransScript() =

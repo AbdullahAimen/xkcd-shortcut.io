@@ -7,12 +7,99 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/titleTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        tools:text="Hello World!" />
+
+    <TextView
+        android:id="@+id/transcriptTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center|top"
+        android:lines="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTv"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Hello World!" />
+
+    <ImageView
+        android:id="@+id/comicImg"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/transcriptTv"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comicImg"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/loadFirstImb"
+            style="@style/imageBtnStyle"
+            android:src="@drawable/baseline_skip_previous" />
+
+        <ImageButton
+            android:id="@+id/loadPreviousImb"
+            style="@style/imageBtnStyle"
+            android:src="@drawable/baseline_arrow_back" />
+
+        <ImageButton
+            android:id="@+id/loadNextImb"
+            style="@style/imageBtnStyle"
+            android:src="@drawable/baseline_arrow_next" />
+
+        <ImageButton
+            android:id="@+id/loadLastImb"
+            style="@style/imageBtnStyle"
+            android:src="@drawable/baseline_skip_next" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageView
+        android:id="@+id/favoriteImg"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        android:padding="6dp"
+        android:src="@drawable/baseline_favorite_border"
+        app:layout_constraintBottom_toBottomOf="@+id/comicImg"
+        app:layout_constraintEnd_toEndOf="@+id/comicImg"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/comicImg"
+        app:layout_constraintTop_toTopOf="@+id/comicImg"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="#E91E63" />
+
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

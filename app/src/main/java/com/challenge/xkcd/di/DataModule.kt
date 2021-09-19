@@ -1,4 +1,4 @@
-package com.challenge.xkcd.modules
+package com.challenge.xkcd.di
 
 import android.content.Context
 import androidx.room.Room

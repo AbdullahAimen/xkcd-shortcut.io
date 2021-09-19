@@ -1,4 +1,4 @@
-package com.challenge.xkcd.modules
+package com.challenge.xkcd.di
 
 import com.challenge.xkcd.dataLayer.dataSource.ComicsDataSource
 import com.challenge.xkcd.dataLayer.dataSource.ComicsDataSourceImpl
