@@ -16,4 +16,7 @@ interface ComicDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertComic(comic: Comic)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllComic(comic: List<Comic>)
 }
