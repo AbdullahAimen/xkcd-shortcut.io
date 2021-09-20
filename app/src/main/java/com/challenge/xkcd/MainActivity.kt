@@ -3,13 +3,15 @@ package com.challenge.xkcd
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.test.espresso.IdlingResource
 import com.challenge.xkcd.databinding.ActivityMainBinding
 import com.challenge.xkcd.domainLayer.GetLocalComicsUseCase
-import com.challenge.xkcd.domainLayer.base.UseCaseHandler
 import com.challenge.xkcd.presentation.ComicPresenter
 import com.challenge.xkcd.util.ComicCommand
+import com.challenge.xkcd.util.EspressoIdlingResource
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -17,13 +19,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var mUseCaseHandler: UseCaseHandler
-
-    @Inject
     lateinit var mComicPresenter: ComicPresenter
 
     @Inject
     lateinit var mGetLocalComicsUseCase: GetLocalComicsUseCase
+
+    val countingIdlingResource: IdlingResource
+        @VisibleForTesting
+        get() = EspressoIdlingResource.idlingResource
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

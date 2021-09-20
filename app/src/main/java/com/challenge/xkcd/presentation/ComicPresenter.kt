@@ -7,6 +7,7 @@ import com.challenge.xkcd.domainLayer.UpdateComicUseCase
 import com.challenge.xkcd.domainLayer.base.UseCase
 import com.challenge.xkcd.domainLayer.base.UseCaseHandler
 import com.challenge.xkcd.util.ComicCommand
+import com.challenge.xkcd.util.EspressoIdlingResource
 import com.challenge.xkcd.util.Event
 import javax.inject.Inject
 
@@ -68,22 +69,27 @@ class ComicPresenter @Inject constructor(
     }
 
     private fun loadComic() {
-        mUseCaseHandler.execute(mLoadComicUseCase, LoadComicUseCase.RequestValues(comicId),
+        EspressoIdlingResource.increment()
+        mUseCaseHandler.execute(
+            mLoadComicUseCase, LoadComicUseCase.RequestValues(comicId),
             object : UseCase.UseCaseCallback<LoadComicUseCase.ResponseValue> {
                 override fun onSuccess(response: LoadComicUseCase.ResponseValue) {
                     currentComic = response.mComicResponse
                     mComicCommand.value =
                         Event(ComicCommand.AssignComicResult(currentComic))
+                    EspressoIdlingResource.decrement()
                 }
 
                 override fun onError(t: Throwable) {
                     mComicCommand.value = Event(ComicCommand.OnErrorLoading(t))
+                    EspressoIdlingResource.decrement()
                 }
             })
     }
 
     fun changeFavorite() {
         currentComic.isFavorite = !currentComic.isFavorite
+        EspressoIdlingResource.increment()
         mUseCaseHandler.execute(
             mUpdateComicUseCase,
             UpdateComicUseCase.RequestValues(currentComic),
@@ -93,10 +99,12 @@ class ComicPresenter @Inject constructor(
                         mComicCommand.value = Event(ComicCommand.assignFavorite)
                     else
                         mComicCommand.value = Event(ComicCommand.removeFavorite)
-
+                    EspressoIdlingResource.decrement()
                 }
 
-                override fun onError(t: Throwable) {}
+                override fun onError(t: Throwable) {
+                    EspressoIdlingResource.decrement()
+                }
             })
     }
 }
