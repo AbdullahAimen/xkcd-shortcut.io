@@ -1,0 +1,1 @@
+# xkcd-shortcut.io
